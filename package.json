@@ -1,0 +1,11 @@
+{
+  "name": "sfdx-json-to-md",
+  "main": "bin/sfdx-json-to-md.js",
+  "version": "1.0.0",
+  "description": "A command line app for turning SFDX json output to markdown",
+  "repository": "toanshulverma/sfdx-json-to-md",
+  "preferGlobal": true,
+  "bin": {
+    "sfdx-json-to-md": "bin/sfdx-json-to-md.js"
+  }
+}
