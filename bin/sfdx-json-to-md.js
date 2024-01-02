@@ -13,13 +13,34 @@ function getArgValue(argName, defaultValue){
     return argVal;
 }
 
+// READ ARGUMENTS
 const input = getArgValue('-i');
 const output = getArgValue('-i', './results.md');
+const mode = getArgValue('-m');
+
 let summaryCategories = {};
 let summarySeverity = {};
 let totalFailures = 0;
+let totalTests = 0;
+let totalTime = '';
+
+
 if(input != null){
-    var resultsData = JSON.parse(fs.readFileSync(input, 'utf8'));
+    if(mode == 'scanner'){
+        parseScannerLogs(input);
+        outputScannerSummary();
+    }
+    else if(mode == 'apextest'){
+        parseApexTestLogs(input);
+        outputApexTestSummary();
+    }
+}
+else{
+    console.log('Error: Input file needed');
+}
+
+function parseScannerLogs(logFile){
+    var resultsData = JSON.parse(fs.readFileSync(logFile, 'utf8'));
 
     resultsData.forEach( (file) => {
         file.violations.forEach( (violation) => {
@@ -32,21 +53,50 @@ if(input != null){
 
         totalFailures += file.violations.length;
     });
-
-    //console.log('------ summarizedData = ' + JSON.stringify(summaryCategories));
-    //console.log('------ summarySeverity = ' + JSON.stringify(summarySeverity));
-
-    outputSummary();
-}
-else{
-    console.log('Error: Input file needed');
 }
 
-function outputSummary() {
+function parseApexTestLogs(logFile){
+    var resultsData = JSON.parse(fs.readFileSync(logFile, 'utf8'));
+
+    const isFailed = (resultsData.result.outcome == 'Failed');
+    totalFailures = resultsData.result.summary.failing;
+    totalTests = resultsData.result.summary.testsRan;
+    totalTime = resultsData.result.summary.testTotalTime;
+
+    summaryCategories = resultsData.result.tests;
+}
+
+function outputScannerSummary() {
     console.log("### Testing Summary:");
     console.log(" ");
     console.log("> :no_entry_sign: " + totalFailures + " Failed test(s)");
     Object.keys(summaryCategories).forEach( (category) => {
         console.log("- " + category + " : " + summaryCategories[category]);
     });
+}
+
+function outputApexTestSummary() {
+    console.log("### Testing Summary:");
+    console.log(" ");
+    console.log(" failures " + totalFailures);
+    if(totalFailures > 0){
+        console.log("> :no_entry_sign: FAIL. " + totalFailures + " Failed test(s)");
+        console.log(" ");
+        
+        console.log("Total Tests: " + totalTests);
+        console.log("Total Execution time: " + totalTime);
+        console.log("Faliure Details");
+        console.log(" ");
+
+        console.log("| Test Method | Execution time (ms) | Failure Message |");
+
+        summaryCategories.forEach( (testResult) => {
+            if(testResult.Outcome == 'Fail'){
+                console.log("| " + testResult.FullName + " | " + testResult.RunTime + " | " + testResult.Message + " |");
+            }
+        });
+    }
+    else{
+        console.log("> :white_check_mark: PASS");
+    }
 }
