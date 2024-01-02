@@ -79,12 +79,12 @@ function outputScannerSummary() {
 function outputApexTestSummary() {
     console.log("### Testing Summary:");
     console.log(" ");
-    console.log(" failures " + totalFailures);
     if(totalFailures > 0){
         console.log("> :no_entry_sign: FAIL. " + totalFailures + " Failed test(s)");
         console.log(" ");
-        console.log("## Failure Summary ##");
         console.log("**Total Tests**: " + totalTests);
+        console.log(" ");
+        console.log("**Failures**: " + totalFailures);
         console.log(" ");
         console.log("**Total Execution time**: " + totalTime);
         console.log("## Faliure Details ##");
