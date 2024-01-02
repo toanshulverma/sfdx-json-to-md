@@ -83,14 +83,15 @@ function outputApexTestSummary() {
     if(totalFailures > 0){
         console.log("> :no_entry_sign: FAIL. " + totalFailures + " Failed test(s)");
         console.log(" ");
-        
-        console.log("Total Tests: " + totalTests);
-        console.log("Total Execution time: " + totalTime);
-        console.log("Faliure Details");
+        console.log("## Failure Summary ##");
+        console.log("**Total Tests**: " + totalTests);
+        console.log(" ");
+        console.log("**Total Execution time**: " + totalTime);
+        console.log("## Faliure Details ##");
         console.log(" ");
 
         console.log("| Test Method | Execution time (ms) | Failure Message |");
-
+        console.log("|--|--|--|");
         summaryCategories.forEach( (testResult) => {
             if(testResult.Outcome == 'Fail'){
                 console.log("| " + testResult.FullName + " | " + testResult.RunTime + " | " + testResult.Message + " |");
