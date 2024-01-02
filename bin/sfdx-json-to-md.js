@@ -70,7 +70,7 @@ function parseApexTestLogs(logFile){
 function outputScannerSummary() {
     console.log("### Testing Summary:");
     console.log(" ");
-    console.log("> :no_entry_sign: " + totalFailures + " Failed test(s)");
+    console.log("> :no_entry_sign: " + totalFailures + " code scanning issues/wanrings");
     Object.keys(summaryCategories).forEach( (category) => {
         console.log("- " + category + " : " + summaryCategories[category]);
     });
@@ -87,7 +87,7 @@ function outputApexTestSummary() {
         console.log("**Failures**: " + totalFailures);
         console.log(" ");
         console.log("**Total Execution time**: " + totalTime);
-        console.log("## Faliure Details ##");
+        console.log("### Faliure Details ###");
         console.log(" ");
 
         console.log("| Test Method | Execution time (ms) | Failure Message |");
