@@ -82,13 +82,27 @@ function parseBuildValidationLogs(logFile){
     else{
         console.log("### :no_entry_sign: Build Validation Failed");
         console.log(" ");
-        console.log("> " + totalFailures + " build failures");
-        console.log(" ");
-        console.log("| Type | Name | Failure Message |");
-        console.log("|--|--|--|");
-        resultsData.result.details.componentFailures.forEach( (failure) => {
-            console.log("| " + failure.componentType + " | " + failure.fileName + " | " + failure.problem + " |");
-        });
+        if(totalFailures > 0){
+            console.log("> " + totalFailures + " Component failures");
+            console.log(" ");
+            console.log("| Type | Name | Failure Message |");
+            console.log("|--|--|--|");
+            resultsData.result.details.componentFailures.forEach( (failure) => {
+                console.log("| " + failure.componentType + " | " + failure.fileName + " | " + failure.problem + " |");
+            });
+        }
+        else{
+            totalFailures = resultsData.result.details.runTestResult.failures.length;
+            console.log("> " + totalFailures + " Test class failures");
+            console.log(" ");
+            console.log("| Class | Method | Message |");
+            console.log("|--|--|--|");
+            resultsData.result.details.runTestResult.failures.forEach( (failure) => {
+                let stackTrace = failure.stackTrace + '';
+                stackTrace = stackTrace.replace(/\n/g,'<br/>');
+                console.log("| " + failure.name + " | " + failure.methodName + " | " + failure.message + ' <br/> ' + stackTrace + " |");
+            });
+        }
     }
 }
 
