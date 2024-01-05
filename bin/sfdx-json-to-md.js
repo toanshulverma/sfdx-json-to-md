@@ -35,6 +35,9 @@ if(input != null){
         parseApexTestLogs(input);
         outputApexTestSummary();
     }
+    else if(mode == 'buildlog'){
+        parseBuildValidationLogs(input);
+    }
 }
 else{
     console.log('Error: Input file needed');
@@ -66,6 +69,29 @@ function parseApexTestLogs(logFile){
 
     summaryCategories = resultsData.result.tests;
 }
+
+function parseBuildValidationLogs(logFile){
+    var resultsData = JSON.parse(fs.readFileSync(logFile, 'utf8'));
+
+    const isSuccess = resultsData.result.success;
+    totalFailures = resultsData.result.details.componentFailures.length;
+
+    if(isSuccess){
+        console.log("> :white_check_mark: PASS");
+    }
+    else{
+        console.log("### :no_entry_sign: Build Validation Failed");
+        console.log(" ");
+        console.log("> " + totalFailures + " build failures");
+        console.log(" ");
+        console.log("| Type | Name | Failure Message |");
+        console.log("|--|--|--|");
+        resultsData.result.details.componentFailures.forEach( (failure) => {
+            console.log("| " + failure.componentType + " | " + failure.fileName + " | " + failure.problem + " |");
+        });
+    }
+}
+
 
 function outputScannerSummary() {
     console.log("### Testing Summary:");
