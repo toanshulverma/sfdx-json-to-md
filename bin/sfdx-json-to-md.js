@@ -77,7 +77,7 @@ function parseBuildValidationLogs(logFile){
     totalFailures = resultsData.result.details.componentFailures.length;
 
     if(isSuccess){
-        console.log("> :white_check_mark: PASS");
+        console.log("> :white_check_mark: Build Validation PASS");
     }
     else{
         console.log("### :no_entry_sign: Build Validation Failed");
@@ -139,6 +139,6 @@ function outputApexTestSummary() {
         });
     }
     else{
-        console.log("> :white_check_mark: PASS");
+        console.log("> :white_check_mark: Apex Test Classes Executions PASS");
     }
 }
