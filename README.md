@@ -4,6 +4,7 @@ Report generator for SFDX logs
 ## What is this utility?
 Folks using Github actions for Salesforce CD/CI activities may either not be using the actions workflow execution summary, or may be using some alternate solution. But, this utility can help you get a prettier view of your workflow summary. Example attached here:
 
+![Sample Job summary of Github actions](./images/Final%20Summary.PNG "Sample Job summary of Github actions")
 
 ## How to install it (Locally)?
 1. Clone this git repo
