@@ -3,6 +3,7 @@ const fs = require("fs");
 class BuildLogReporter {
 
     logContent = '';
+    totalFailures = 0;
     generateReport(logFile) {
         this.parse(logFile);
         return this.logContent;
@@ -25,7 +26,7 @@ class BuildLogReporter {
         else{
             this.addToLog("### :no_entry_sign: Build Validation Failed");
             this.addToLog(" ");
-            if(totalFailures > 0){
+            if(this.totalFailures > 0){
                 this.addToLog("> " + this.totalFailures + " Component failures");
                 this.addToLog(" ");
                 this.addToLog("| Type | Name | Failure Message |");
@@ -36,7 +37,7 @@ class BuildLogReporter {
             }
             else{
                 this.totalFailures = resultsData.result.details.runTestResult.failures.length;
-                this.addToLog("> " + totalFailures + " Test class failures");
+                this.addToLog("> " + this.totalFailures + " Test class failures");
                 this.addToLog(" ");
                 this.addToLog("| Class | Method | Message |");
                 this.addToLog("|--|--|--|");
