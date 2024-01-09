@@ -3,11 +3,17 @@ author: Anshul Verma (Cynoteck Technology Solutions LLC)
 description: 'This action parses SFDX generated logs/reports and generates markdown report ready to be added within actions workflow step summary'
 inputs:
   i:
+    type: string
+    required: true
     description: path of log/report file to be parsed
-    required: false
 runs:
   using: 'node16'
-  main: 'index.js'
+  main: '/bin/sfdx-json-to-md.js'
 branding:
   icon: 'terminal'
   color: 'purple'
+
+# Mapping the workflow outputs with job outputs
+outputs:
+  REPORT: 
+    description: "Report in Markdown"
