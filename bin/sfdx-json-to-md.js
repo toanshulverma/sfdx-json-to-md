@@ -42,9 +42,15 @@ if(input != null){
     }
 
     let mdReport = reporter.generateReport(input);
-    //core.setCommandEcho(false);
-    //core.setOutput("REPORT", mdReport);
-    //core.setCommandEcho(true);
+    
+    if (require.main === module) {
+        // put info in console log when in command line mode
+        mdReport = mdReport.replace(/<br\/>/g,'\n');
+        console.log(mdReport);
+    }
+    else{
+        core.setOutput("REPORT", mdReport);
+    }
 }
 else{
     console.log('Error: Input file needed');
