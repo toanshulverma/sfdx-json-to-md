@@ -1,6 +1,6 @@
 name: 'Salesforce SFDX MarkDown report generator'
 author: 'Anshul Verma (Cynoteck Technology Solutions LLC)'
-description: 'This action parses SFDX generated logs/reports and generates markdown report ready to be added within actions workflow step summary'
+description: 'Parses SFDX generated logs/reports and generates report content in MarkDown format'
 
 # Action Inputs
 inputs:
