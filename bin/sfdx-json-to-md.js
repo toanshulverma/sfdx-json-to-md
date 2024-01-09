@@ -1,8 +1,14 @@
 #!/usr/bin/env node
 const fs = require("fs");
-const scannerReporter = require("./bin/ScannerReporter");
-const apexTestReporter = require("./bin/ApexTestReporter");
-const buildLogReporter = require("./bin/BuildLogReporter");
+const core = require('@actions/core');
+
+//const scannerReporter = require("./bin/ScannerReporter");
+//const apexTestReporter = require("./bin/ApexTestReporter");
+//const buildLogReporter = require("./bin/BuildLogReporter");
+
+const ScannerReporter = require('./ScannerReporter');
+const ApexTestReporter = require('./ApexTestReporter');
+const BuildLogReporter = require('./BuildLogReporter');
 
 
 function getArgValue(argName, defaultValue){
@@ -31,17 +37,18 @@ const mode = getArgValue('-m');
 
 
 if(input != null){
-    let mdReport = ''
+    //let mdReport = ''
+    let reporter = {};
     if(mode == 'scanner'){
-        mdReport = scannerReporter.generateReport(input);
+        reporter = new ScannerReporter();
     }
     else if(mode == 'apextest'){
-        mdReport = apexTestReporter.generateReport(input);
+        reporter = new ApexTestReporter();
     }
     else if(mode == 'buildlog'){
-        mdReport = buildLogReporter.generateReport(input);
+        reporter = new BuildLogReporter();
     }
-
+    let mdReport = reporter.generateReport(input);
     core.setOutput("REPORT", mdReport);
 }
 else{
