@@ -1,11 +1,17 @@
 name: 'Salesforce SFDX MarkDown report generator'
-author: Anshul Verma (Cynoteck Technology Solutions LLC)
+author: 'Anshul Verma (Cynoteck Technology Solutions LLC)'
 description: 'This action parses SFDX generated logs/reports and generates markdown report ready to be added within actions workflow step summary'
+
+# Action Inputs
 inputs:
-  i:
+  InputFile:
     type: string
     required: true
     description: path of log/report file to be parsed
+  Mode:
+    type: string
+    required: true
+    description: Report Generation mode (apexlog, scanner, buildlog)
 runs:
   using: 'node16'
   main: '/bin/sfdx-json-to-md.js'
