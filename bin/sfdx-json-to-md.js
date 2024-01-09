@@ -6,9 +6,9 @@ const core = require('@actions/core');
 //const apexTestReporter = require("./bin/ApexTestReporter");
 //const buildLogReporter = require("./bin/BuildLogReporter");
 
-const ScannerReporter = require('./ScannerReporter');
-const ApexTestReporter = require('./ApexTestReporter');
-const BuildLogReporter = require('./BuildLogReporter');
+const ScannerReporter = require('../Reporters/ScannerReporter');
+const ApexTestReporter = require('../Reporters/ApexTestReporter');
+const BuildLogReporter = require('../Reporters/BuildLogReporter');
 
 
 function getArgValue(argName, defaultValue){
