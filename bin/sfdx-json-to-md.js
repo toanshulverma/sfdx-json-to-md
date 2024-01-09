@@ -2,10 +2,6 @@
 const fs = require("fs");
 const core = require('@actions/core');
 
-//const scannerReporter = require("./bin/ScannerReporter");
-//const apexTestReporter = require("./bin/ApexTestReporter");
-//const buildLogReporter = require("./bin/BuildLogReporter");
-
 const ScannerReporter = require('../Reporters/ScannerReporter');
 const ApexTestReporter = require('../Reporters/ApexTestReporter');
 const BuildLogReporter = require('../Reporters/BuildLogReporter');
@@ -26,19 +22,15 @@ function getArgValue(argName, defaultValue){
 
 // READ ARGUMENTS
 const input = getArgValue('-i');
-//const output = getArgValue('-i', './results.md');
 const mode = getArgValue('-m');
 
-// let summaryCategories = {};
-// let summarySeverity = {};
-// let totalFailures = 0;
-// let totalTests = 0;
-// let totalTime = '';
-
+if(mode == null || mode == ''){
+    console.log('Error: Mode is missing');
+}
 
 if(input != null){
-    //let mdReport = ''
     let reporter = {};
+    
     if(mode == 'scanner'){
         reporter = new ScannerReporter();
     }
@@ -48,8 +40,11 @@ if(input != null){
     else if(mode == 'buildlog'){
         reporter = new BuildLogReporter();
     }
+
     let mdReport = reporter.generateReport(input);
-    core.setOutput("REPORT", mdReport);
+    //core.setCommandEcho(false);
+    //core.setOutput("REPORT", mdReport);
+    //core.setCommandEcho(true);
 }
 else{
     console.log('Error: Input file needed');
