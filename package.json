@@ -8,6 +8,9 @@
   "bin": {
     "sfdx-json-to-md": "bin/sfdx-json-to-md.js"
   },
+  "files": [
+	"/Reporters"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/toanshulverma/sfdx-json-to-md",
   "author": "Anshl Verma (http://vermanshul.com)",
