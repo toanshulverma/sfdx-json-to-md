@@ -1,10 +1,13 @@
 {
   "name": "sfdx-json-to-md",
-  "main": "sfdx-json-to-md.js",
+  "main": "bin/sfdx-json-to-md.js",
   "version": "1.2.002",
   "description": "A command line utility for turning SFDX json output to markdown for build log reporting",
   "repository": "toanshulverma/sfdx-json-to-md",
   "preferGlobal": true,
+  "bin": {
+    "sfdx-json-to-md": "bin/sfdx-json-to-md.js"
+  },
   "license": "MIT",
   "homepage": "https://github.com/toanshulverma/sfdx-json-to-md",
   "author": "Anshl Verma (http://vermanshul.com)"

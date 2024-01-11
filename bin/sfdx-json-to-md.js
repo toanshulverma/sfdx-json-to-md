@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 const fs = require("fs");
 
-const ScannerReporter = require('./Reporters/ScannerReporter');
-const ApexTestReporter = require('./Reporters/ApexTestReporter');
-const BuildLogReporter = require('./Reporters/BuildLogReporter');
+const ScannerReporter = require('../Reporters/ScannerReporter');
+const ApexTestReporter = require('../Reporters/ApexTestReporter');
+const BuildLogReporter = require('../Reporters/BuildLogReporter');
 
 
 function getArgValue(argName, defaultValue){
@@ -24,7 +24,7 @@ const input = getArgValue('-i');
 const mode = getArgValue('-m');
 
 if(mode == null || mode == ''){
-    console.log('Error: Mode is missing');
+    console.error('Error: Mode is missing');
 }
 
 if(input != null){
@@ -39,6 +39,10 @@ if(input != null){
     else if(mode == 'buildlog'){
         reporter = new BuildLogReporter();
     }
+    else{
+        console.error('Error: Invalid Mode');
+        process.exit(1);
+    }
 
     let mdReport = reporter.generateReport(input);
     
@@ -52,5 +56,5 @@ if(input != null){
     }
 }
 else{
-    console.log('Error: Input file needed');
+    console.error('Error: Input file needed');
 }
