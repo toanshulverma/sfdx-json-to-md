@@ -25,17 +25,19 @@ if(mode == null || mode == ''){
 
 if(input != null){
     let reporter = ReporterFactory.getReporter(mode);
-    
-    let mdReport = reporter.generateReport(input);
-    
-    if (require.main === module) {
-        // put info in console log when in command line mode
+
+    if(reporter != null){
+        let mdReport = reporter.generateReport(input);
+        
+        //Convert HTML line breaks to ASCII line breaks
         mdReport = mdReport.replace(/<br\/>/g,'\n');
+
         console.log(mdReport);
     }
     else{
-        //core.setOutput("REPORT", mdReport);
+        console.error('Error: Invalid Mode');
     }
+    
 }
 else{
     console.error('Error: Input file needed');
