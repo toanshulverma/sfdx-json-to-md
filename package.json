@@ -10,5 +10,6 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/toanshulverma/sfdx-json-to-md",
-  "author": "Anshl Verma (http://vermanshul.com)"
+  "author": "Anshl Verma (http://vermanshul.com)",
+  "dependencies": {}
 }
