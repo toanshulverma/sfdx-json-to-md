@@ -19,7 +19,15 @@ class ScannerReporter {
     }
 
     parse(logFile){
-        var resultsData = JSON.parse(fs.readFileSync(logFile, 'utf8'));
+        var resultsData;
+        
+        try{
+            resultsData = JSON.parse(fs.readFileSync(logFile, 'utf8'));
+        }catch(e){
+            console.error('Error : Unable to read input file: ' + logFile);
+            process.exit(1);
+        }
+        
         var _self = this;
 
         resultsData.forEach( (file) => {
