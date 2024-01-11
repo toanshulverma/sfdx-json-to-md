@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 const fs = require("fs");
-const core = require('@actions/core');
 
-const ScannerReporter = require('../Reporters/ScannerReporter');
-const ApexTestReporter = require('../Reporters/ApexTestReporter');
-const BuildLogReporter = require('../Reporters/BuildLogReporter');
+const ScannerReporter = require('./Reporters/ScannerReporter');
+const ApexTestReporter = require('./Reporters/ApexTestReporter');
+const BuildLogReporter = require('./Reporters/BuildLogReporter');
 
 
 function getArgValue(argName, defaultValue){
@@ -49,7 +48,7 @@ if(input != null){
         console.log(mdReport);
     }
     else{
-        core.setOutput("REPORT", mdReport);
+        //core.setOutput("REPORT", mdReport);
     }
 }
 else{

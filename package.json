@@ -1,15 +1,8 @@
 {
   "name": "sfdx-json-to-md",
-  "main": "bin/sfdx-json-to-md.js",
+  "main": "sfdx-json-to-md.js",
   "version": "1.0.0",
   "description": "A command line utility for turning SFDX json output to markdown for build log reporting",
   "repository": "toanshulverma/sfdx-json-to-md",
-  "preferGlobal": true,
-  "bin": {
-    "sfdx-json-to-md": "bin/sfdx-json-to-md.js"
-  },
-  "dependencies": {
-    "@actions/core": "^1.10.1",
-    "@actions/github": "^6.0.0"
-  }
+  "preferGlobal": true
 }
