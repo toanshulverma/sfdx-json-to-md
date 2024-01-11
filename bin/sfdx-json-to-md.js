@@ -1,10 +1,6 @@
 #!/usr/bin/env node
-const fs = require("fs");
-
-const ScannerReporter = require('../Reporters/ScannerReporter');
-const ApexTestReporter = require('../Reporters/ApexTestReporter');
-const BuildLogReporter = require('../Reporters/BuildLogReporter');
-
+//const fs = require("fs");
+const ReporterFactory = require('../Reporters/ReporterFactory');
 
 function getArgValue(argName, defaultValue){
     // Checks for given argument and if it has a value
@@ -28,22 +24,8 @@ if(mode == null || mode == ''){
 }
 
 if(input != null){
-    let reporter = {};
+    let reporter = ReporterFactory.getReporter(mode);
     
-    if(mode == 'scanner'){
-        reporter = new ScannerReporter();
-    }
-    else if(mode == 'apextest'){
-        reporter = new ApexTestReporter();
-    }
-    else if(mode == 'buildlog'){
-        reporter = new BuildLogReporter();
-    }
-    else{
-        console.error('Error: Invalid Mode');
-        process.exit(1);
-    }
-
     let mdReport = reporter.generateReport(input);
     
     if (require.main === module) {
