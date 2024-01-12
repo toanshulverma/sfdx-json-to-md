@@ -28,18 +28,16 @@ class ScannerReporter {
             process.exit(1);
         }
         
-        var _self = this;
-
         resultsData.forEach( (file) => {
             file.violations.forEach( (violation) => {
-                let oldVal = _self.summaryCategories[violation.category] | 0;
-                _self.summaryCategories[violation.category] = oldVal + 1;
+                let oldVal = this.summaryCategories[violation.category] | 0;
+                this.summaryCategories[violation.category] = oldVal + 1;
 
-                let oldValsev = summarySeverity[violation.severity] | 0;
-                _self.summarySeverity[violation.severity] = oldValsev + 1;
+                let oldValsev = this.summarySeverity[violation.severity] | 0;
+                this.summarySeverity[violation.severity] = oldValsev + 1;
             });
 
-            _self.totalFailures += file.violations.length;
+            this.totalFailures += file.violations.length;
         });
     }
 
@@ -48,7 +46,7 @@ class ScannerReporter {
         this.addToLog(" ");
         this.addToLog("> :no_entry_sign: " + this.totalFailures + " code scanning issues/wanrings");
         Object.keys(this.summaryCategories).forEach( (category) => {
-            this.addToLog("- " + category + " : " + summaryCategories[category]);
+            this.addToLog("- " + category + " : " + this.summaryCategories[category]);
         });
     }
 }
