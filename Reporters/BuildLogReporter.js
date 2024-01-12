@@ -11,7 +11,6 @@ class BuildLogReporter {
 
     addToLog(log){
         this.logContent += log + '<br/>';
-        console.log(log);
     }
 
     parse(logFile){

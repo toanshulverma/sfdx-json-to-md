@@ -9,7 +9,6 @@ class ScannerReporter {
 
     addToLog(log){
         this.logContent += log + '<br/>';
-        console.log(log);
     }
 
     generateReport(logFile) {
